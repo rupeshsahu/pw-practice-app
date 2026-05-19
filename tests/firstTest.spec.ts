@@ -93,3 +93,25 @@ test('Extracting values',async({page})=> {
 
 })
 
+test('assertions',async({page})=> {
+
+//General asserstions
+  const value=5
+  await expect(value).toEqual(5)
+  const basicForms= page.locator('nb-card').filter({hasText:"Basic form"})
+  const buttonText=await basicForms.getByRole('button').textContent()
+  await expect(buttonText).toEqual("Submit")
+
+
+
+  //locator assertions
+  const basicFormButton=basicForms.getByRole('button')
+  await expect(basicFormButton).toHaveText("Submit")
+
+  //soft assertion
+  await expect.soft(basicFormButton).toHaveText("Submit1")
+  await  basicFormButton.click()
+
+
+})
+
